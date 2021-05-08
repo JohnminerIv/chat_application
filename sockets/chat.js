@@ -24,7 +24,7 @@ socket.on('user changed channel', (newChannel) => {
       messages : channels[newChannel]
     });
   });
-}
+
 
 
 
@@ -52,4 +52,7 @@ socket.on('user changed channel', (newChannel) => {
     //Send over the onlineUsers
     socket.emit('get online users', onlineUsers);
   })
+  socket.on('get all channels', () => {
+    socket.emit('all channels', channels);
+  });
 }

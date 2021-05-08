@@ -5,7 +5,7 @@ $(document).ready(()=>{
   //Keep track of the current user
   let currentUser;
   socket.emit('get online users');
-
+  socket.emit('get all channels');
   socket.emit('user changed channel', "General");
 
   //Users can change the channel by clicking on its name.
@@ -91,6 +91,12 @@ socket.on('new message', (data) => {
 socket.on('new channel', (newChannel) => {
   $('.channels').append(`<div class="channel">${newChannel}</div>`);
 });
+socket.on('all channels', (channels) => {
+  // $('.channels').empty();
+  for (newChannel in channels){
+     $('.channels').append(`<div class="channel">${newChannel}</div>`);
+  }
+});
 
 // Make the channel joined the current channel. Then load the messages.
 // This only fires for the client who made the channel.
@@ -108,4 +114,5 @@ socket.on('user changed channel', (data) => {
       </div>
     `);
   });
+});
 });
